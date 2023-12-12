@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func dt1() {
 	// define int's a&b
 	var a int = 10
 	var b int = 20
@@ -75,7 +75,48 @@ func main() {
 	menu["idli"] = 20
 	fmt.Println(menu)
 	// define a Interface
-	// define a channel
+	var int1 interface{} //empty interface
+	int1 = 1
+	int1 = "abcd"
+	fmt.Println(int1)
+
 	fmt.Println(a, b, a1, b2, c, c1, a2, a3, hello1, hello, hello2, sliceZeros)
 }
-s
+
+type School interface { // aim School --> student, teacher, xyz
+	Student(string, int) int
+	ClassName(int) string //id --> 10th
+}
+
+type stud struct {
+	id        int
+	name      string
+	className string
+	marks     int
+}
+
+func (s stud) Student(s_name string, id int) int { // s is known as reciver for the function
+	fmt.Println(s_name, id)
+	return 20
+}
+
+func (s stud) Student2() int { // you can call structobject.Student2()
+	fmt.Println(s.name, s.id)
+	return s.marks
+}
+
+func (s stud) ClassName(id int) string {
+	fmt.Println(id)
+	return "10th"
+}
+
+func main() {
+
+	var stud1 = stud{1, "pawan", "10th", 50}
+	marks := stud1.Student("pawan", 1)
+	marks2 := stud1.Student2()
+	fmt.Println(marks, marks2)
+
+	// define a channel
+
+}
