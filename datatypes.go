@@ -76,6 +76,7 @@ func dt1() {
 	fmt.Println(menu)
 	// define a Interface
 	var int1 interface{} //empty interface
+	//
 	int1 = 1
 	int1 = "abcd"
 	fmt.Println(int1)
@@ -84,8 +85,8 @@ func dt1() {
 }
 
 type School interface { // aim School --> student, teacher, xyz
-	Student(string, int) int
-	ClassName(int) string //id --> 10th
+	Student(string, int) int //
+	ClassName(int) string    //id --> 10th
 }
 
 type stud struct {
@@ -110,13 +111,70 @@ func (s stud) ClassName(id int) string {
 	return "10th"
 }
 
+// /
+func printer(s School) { // 2nd use of interfaces, we can pass stud object in place of School
+	marks := s.Student("general_user", 123)
+	fmt.Println(marks)
+}
+
 func main() {
 
 	var stud1 = stud{1, "pawan", "10th", 50}
 	marks := stud1.Student("pawan", 1)
 	marks2 := stud1.Student2()
 	fmt.Println(marks, marks2)
-
+	printer(stud1) // interface calling
 	// define a channel
 
 }
+
+/*
+
+interface discution
+
+d1,d2,d3
+comp--> clearence
+salry_action(comp)
+
+-------------------------
+bmw --> top_speed, dist, fule, time, colour
+//benz --> top_speed, dist, fule, seats, time
+audi --> top_speed, dist, fule, type_fule, time, colour
+
+(b bmw) milage() float32{
+    return b.dist/b.fule
+}
+
+(b bmw) avg_speed() float32{
+    return b.dist/b.time
+}
+
+(a audi) milage() float32{
+    return a.dist/a.fule
+}
+
+(a audi) avg_speed() float32{
+    return a.dist/a.time
+}
+
+// type Car interface {
+//     avg_speed() float32
+//     milage() float32
+// }
+
+// func car_analysis(c Car){
+//     fmt.Println(c.milage())
+//     fmt.Println(c.avg_speed())
+// }
+
+func car_analysis(c Bmw){
+    fmt.Println(c.milage())
+    fmt.Println(c.avg_speed())
+}
+
+func car_analysis(c Audi){
+    fmt.Println(c.milage())
+    fmt.Println(c.avg_speed())
+}
+
+*/
