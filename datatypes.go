@@ -82,6 +82,15 @@ func dt1() {
 	fmt.Println(int1)
 
 	fmt.Println(a, b, a1, b2, c, c1, a2, a3, hello1, hello, hello2, sliceZeros)
+
+	//interfaces
+	var stud1 = stud{1, "pawan", "10th", 50}
+	marks := stud1.Student("pawan", 1)
+	marks2 := stud1.Student2()
+	fmt.Println(marks, marks2)
+	printer(stud1) // interface calling
+	// define a channel
+	// ->[int]->
 }
 
 type School interface { // aim School --> student, teacher, xyz
@@ -118,19 +127,29 @@ func printer(s School) { // 2nd use of interfaces, we can pass stud object in pl
 }
 
 func main() {
-
-	var stud1 = stud{1, "pawan", "10th", 50}
-	marks := stud1.Student("pawan", 1)
-	marks2 := stud1.Student2()
-	fmt.Println(marks, marks2)
-	printer(stud1) // interface calling
-	// define a channel
+	// ->[int]-> // /---
+	ch1 := make(chan int, 1) // buffered
+	ch1 <- 5                 // [5]
+	data1 := <-ch1           //5<-[]
+	ch1 <- 7                 // [7]
+	data2 := <-ch1           // 7<-[]
+	close(ch1)
+	data3 := <-ch1        // 0
+	ch2 := make(chan int) // unbuffered channel
+	close(ch2)
+	// ch2 <- 10 | "<-ch2"
+	fmt.Println(data1)
+	fmt.Println(data2)
+	fmt.Println(data3)
 
 }
 
 /*
 
-interface discution
+---> main-->|--
+			|--
+
+interface discussion
 
 d1,d2,d3
 comp--> clearence
