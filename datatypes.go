@@ -1,5 +1,7 @@
 package main
 
+// https://www.w3schools.com/go/go_formatting_verbs.php
+
 import (
 	"fmt"
 )
