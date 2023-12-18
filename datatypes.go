@@ -1,7 +1,5 @@
 package main
 
-// https://www.w3schools.com/go/go_formatting_verbs.php
-
 import (
 	"fmt"
 )
@@ -93,6 +91,21 @@ func dt1() {
 	printer(stud1) // interface calling
 	// define a channel
 	// ->[int]->
+
+	ch1 := make(chan int, 1) // buffered
+	ch1 <- 5                 // [5]
+	data1 := <-ch1           //5<-[]
+	ch1 <- 7                 // [7]
+	data2 := <-ch1           // 7<-[]
+	close(ch1)
+	data3 := <-ch1        // 0
+	ch2 := make(chan int) // unbuffered channel
+	close(ch2)
+	// ch2 <- 10 | "<-ch2"
+	fmt.Println(data1)
+	fmt.Println(data2)
+	fmt.Println(data3)
+
 }
 
 type School interface { // aim School --> student, teacher, xyz
@@ -129,20 +142,48 @@ func printer(s School) { // 2nd use of interfaces, we can pass stud object in pl
 }
 
 func main() {
-	// ->[int]-> // /---
-	ch1 := make(chan int, 1) // buffered
-	ch1 <- 5                 // [5]
-	data1 := <-ch1           //5<-[]
-	ch1 <- 7                 // [7]
-	data2 := <-ch1           // 7<-[]
-	close(ch1)
-	data3 := <-ch1        // 0
-	ch2 := make(chan int) // unbuffered channel
-	close(ch2)
-	// ch2 <- 10 | "<-ch2"
-	fmt.Println(data1)
-	fmt.Println(data2)
-	fmt.Println(data3)
+
+	fmt.Println("Normal for loop")
+	for i := 0; i < 10; i++ {
+		fmt.Println(i * i)
+	}
+
+	fmt.Println("Normal while loop")
+	i := 0
+	for {
+		if i == 10 { // 1 ==10
+			break // line - 160
+		}
+		if i%2 == 0 { // 1%2 ->1
+			i++
+			continue // line 150 , ie. next iteration.
+		}
+		fmt.Println(i * i)
+		i++
+	}
+
+	fmt.Println("Normal array loop")
+	arr1 := [5]int{1, 2, 34, 5, 6}
+	for i := 0; i < len(arr1); i++ {
+		fmt.Println(i, arr1[i])
+	}
+
+	fmt.Println("array loop with range")
+	for idx, value := range arr1[:] {
+		fmt.Println(idx, value)
+	}
+
+	fmt.Println("map loop with range")
+	map1 := map[string]string{"key1": "value1", "key2": "VALUE2"}
+	for key, value := range map1 {
+		fmt.Println(key, value)
+	}
+
+	for _, value := range map1 {
+		fmt.Println(value)
+	}
+
+	// if , switch case,
 
 }
 
