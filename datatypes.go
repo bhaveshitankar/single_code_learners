@@ -141,8 +141,7 @@ func printer(s School) { // 2nd use of interfaces, we can pass stud object in pl
 	fmt.Println(marks)
 }
 
-func main() {
-
+func loops() {
 	fmt.Println("Normal for loop")
 	for i := 0; i < 10; i++ {
 		fmt.Println(i * i)
@@ -183,7 +182,87 @@ func main() {
 		fmt.Println(value)
 	}
 
+}
+
+func conditionalOperators() {
 	// if , switch case,
+
+	// switch inp := 2;inp {
+	inp := 1
+	switch inp {
+	case 1:
+		fmt.Println("Thanks for choosing English..!")
+		fmt.Println("To change press 9")
+	case 2:
+		fmt.Println("Thanks for choosing Hindi..!")
+		fmt.Println("To change press 8")
+	default:
+		fmt.Println("In valid input")
+	}
+
+	inp = 2
+	if inp == 1 {
+		fmt.Println("Thanks for choosing English..!")
+		fmt.Println("To change press 9")
+	} else if inp == 2 {
+		fmt.Println("Thanks for choosing Hindi..!")
+		fmt.Println("To change press 8")
+	} else {
+		fmt.Println("In valid input")
+	}
+}
+
+func f1() {
+	i := 1
+	if i == 1 {
+		return
+	} else {
+		fmt.Println("Hi from f1")
+	}
+	return
+}
+
+func f1WithParams(i int) {
+	// i := 1
+	if i == 1 {
+		return
+	} else {
+		fmt.Println("Hi from f1WithParams")
+	}
+	return
+}
+
+func f1WithParamsAndReturn(i int, j int) (int, int, int) {
+	return i, j, i * j
+}
+
+func f1WithParamsAndReturnShortcut(i, j int, str1, str2 string) (int, int, int) {
+	fmt.Println(str1)
+	fmt.Println(str2)
+	return i, j, i * j
+}
+
+func callerForAllFunctions() {
+
+	fmt.Println("\nrunning f1")
+	f1()
+
+	fmt.Println("\nrunning f1WithParams")
+	f1WithParams(2)
+
+	fmt.Println("\nrunning f1WithParamsAndReturn")
+	i, j, mult := f1WithParamsAndReturn(2, 3)
+	fmt.Println(i, j, mult)
+
+	fmt.Println("\nrunning f1WithParamsAndReturnShortcut")
+	i, j, mult = f1WithParamsAndReturnShortcut(4, 5, "hello World", "func of f1WithParamsAndReturnShortcut")
+	fmt.Println(i, j, mult)
+}
+
+func main() {
+
+	// conditionalOperators()
+	callerForAllFunctions()
 
 }
 
