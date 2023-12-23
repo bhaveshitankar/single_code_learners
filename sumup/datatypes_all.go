@@ -1,4 +1,4 @@
-package main
+package sumup
 
 import (
 	"fmt"
@@ -294,7 +294,7 @@ func solving2sum(arr []int, target int) {
 	}
 }
 
-func main() {
+func main1() {
 
 	// conditionalOperators()
 	// callerForAllFunctions()
