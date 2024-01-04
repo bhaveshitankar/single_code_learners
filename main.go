@@ -1,24 +1,44 @@
 package main
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
-func chopping() { // t=0
-	fmt.Println("I am chopping now...") // t=1 started printing
-	ch <- 1                             // t=2
-} // t=3
+func divide(a, b, index int) (result int) {
+	defer func() {
+		if r := recover(); r != nil { // if panic occurs recover will return r that is not nil, and we are printing it.
+			fmt.Println("There was a panic due to : ", r)
+			// result = -1
+			// os.Exit(1)
+		}
+	}()
+	if b == 0 {
+		result = -1 // hardcoding the results
+		panic("Hey, please don't send b=0..!")
+	}
+	result = a / b
+	arr1 := []int{1, 2, 3, 4}
+	if index > 3 {
+		panic("Hey, please don't send index>3..!")
+	}
+	fmt.Println(arr1[index])
+	return
+}
 
-func cooking() { // t=0
-	fmt.Println("I am cooking now...") // t=1 started printing.
-	ch <- 2                            //t=2
-} //t=3
-
-var ch = make(chan int, 2)
+func divideV2(a, b, index int) (result int, err error) {
+	if b == 0 {
+		result, err = 0, errors.New("trying to devide by zero...")
+		return
+	}
+	result = a / b
+	arr1 := []int{1, 2, 3, 4}
+	fmt.Println(arr1[index])
+	return
+}
 
 func main() {
-	defer close(ch)
-	go chopping()          // t=0s calling chopping
-	go cooking()           // t=0s calling cooking
-	dataOfchopping := <-ch // t=2
-	dataOfcooking := <-ch  //t=2
-	fmt.Println(dataOfchopping, dataOfcooking)
-} // t=2
+	fmt.Println("Division output : ", divide(4, 2, 7))
+	fmt.Println("Division output : ", divide(1, 0, 0))
+	fmt.Println("Division output : ", divide(2, 2, 100))
+}
