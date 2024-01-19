@@ -137,4 +137,6 @@ func (s stud) ClassName(id int) string {
 func printer(s School) { // 2nd use of interfaces, we can pass stud object in place of School
 	marks := s.Student("general_user", 123)
 	fmt.Println(marks)
+	s = stud{} // overriding the school object to stud object.
+	fmt.Println(s)
 }

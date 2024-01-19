@@ -74,6 +74,11 @@ type Person struct {
 	Hobbies []Hobby
 }
 
+func (p *Person) ShowPerson() string {
+	p.Name = "new name"
+	return "I am a function for Person"
+}
+
 type Employee struct {
 	Person     // Inheritance
 	EId        string
@@ -81,7 +86,7 @@ type Employee struct {
 	Department string
 }
 
-func main() {
+func Inheritance() {
 	// Inheritance
 	emp := Employee{
 		Person: Person{
@@ -103,6 +108,63 @@ func main() {
 	}
 	fmt.Println(emp)
 	fmt.Println(emp.EId)
+	a := emp.Person.ShowPerson()
+	fmt.Println(a)
+}
+
+func Polymorphism() {
+	// Polymorphism
+	var HoldAnything interface{}
+	HoldAnything = 1
+	fmt.Println(HoldAnything)
+	HoldAnything = "my data" // overring the type of HoldAnything variable to string.
+	fmt.Println(HoldAnything)
+	// car interface we can audi or mercedes to it
+}
+
+func main() {
+	/*
+		// pointers :
+		[block of memory[32bits]][memory location]<-- pointer
+		I2 --> [24][56789012345] --> &I2 this returns 56789012345
+		*&I2 --> 24
+		* --> it will extract value from address
+		& --> it will extract address from value
+	*/
+	var I1 *int // I1 will hold a memory address of an Int--> [0xc00000a0e0][0xc000052020]
+	fmt.Println(I1)
+	fmt.Println(&I1)
+	var I2 int = 24 // I2 will hold value of type int at a memory address
+	fmt.Println(&I2)
+	I1 = &I2 // &I2 will return address of I2
+	fmt.Println(&I1)
+	// update values using references.
+	fmt.Println(I1)
+	*I1 = 36
+	fmt.Println(I2)
+
+	fmt.Println("without pointer.. ")
+	p1 := Person{}
+	fmt.Println(p1)
+	fmt.Println(p1.Age)
+	p1 = modifyPerson(p1)
+	fmt.Println(p1.Age)
+
+	fmt.Println("with pointer.. ")
+	p2 := &Person{}
+	fmt.Println(p2)
+	fmt.Println(p2.Age)
+	modifyPersonWithPointer(p2)
+	fmt.Println(p2.Age)
+}
+
+func modifyPerson(p Person) Person { // over use of memory
+	p.Age = 50 // updating copy of p
+	return p   // returning the copy.
+}
+
+func modifyPersonWithPointer(p *Person) { // p is just a refrence to Person object created in main.
+	p.Age = 50 // modifing value at address.
 }
 
 //
